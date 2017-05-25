@@ -18,8 +18,18 @@ $title: #6699FF;
 nav {
   font-family: 'Architects Daughter', serif;
   font-size: 20px;
-  a#title{
+  a#title {
     font-size: 38px;
     color: $title;
   }
 }
+
+div#threejs {
+  padding: 0;
+  margin: 0;
+}
+
+//div.container-fluid {
+//  padding: 0;
+//  margin: 0;
+//}

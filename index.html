@@ -1,1 +1,68 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="author" content="soolx"><title>Soolx</title><!-- Bootstrap core CSS--><link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"><link href="public/css/main.min.css" rel="stylesheet"><!--Jquery--><script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script><!-- Bootstrap core JavaScript--><script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script></head><body><nav class="navbar navbar-default navbar-fixed-top"><div class="container"><div class="navbar-header"><button type="button" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar" class="navbar-toggle collapsed"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a id="title" href="/" class="navbar-brand">Soolx</a></div><div id="navbar" class="navbar-collapse collapse"><ul class="nav navbar-nav"><!--li.active--><!--    a(href='/') Home--><li><a href="http://blog.soolx.club" target="_blank">Blog</a></li><li><a href="https://github.com/soolx" target="_blank">GitHub</a></li><li><a href="mailto:soolx911@gmail.com" target="_blank">Email</a></li></ul></div></div></nav></body></html>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="author" content="soolx"><title>Soolx</title><!-- Bootstrap core CSS--><link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"><link href="public/css/main.min.css" rel="stylesheet"><!--Jquery--><script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script><!-- Bootstrap core JavaScript--><script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script></head><body><nav class="navbar navbar-default navbar-fixed-top"><div class="container"><div class="navbar-header"><button type="button" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar" class="navbar-toggle collapsed"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a id="title" href="/" class="navbar-brand">Soolx</a></div><div id="navbar" class="navbar-collapse collapse"><ul class="nav navbar-nav"><!--li.active--><!--    a(href='/') Home--><li><a href="http://blog.soolx.club" target="_blank">Blog</a></li><li><a href="https://github.com/soolx" target="_blank">GitHub</a></li><li><a href="mailto:soolx911@gmail.com" target="_blank">Email</a></li></ul></div></div></nav><!--div.container-fluid--><!--    div.row--><div id="threejs"></div><script src="public/lib/threejs/three.min.js"></script><script src="public/lib/threejs/renderers/Projector.js"></script><script src="public/lib/threejs/renderers/CanvasRenderer.js"></script><script>var container, stats;
+var camera, scene, renderer;
+var geometry, group;
+var mouseX = 0, mouseY = 0;
+var windowHalfX = window.innerWidth / 2;
+var windowHalfY = (window.innerHeight - 30) / 2;
+document.addEventListener( 'mousemove', onDocumentMouseMove, false );
+init();
+animate();
+function init() {
+    container = document.createElement('div');
+    //document.body.appendChild( container );
+    $("#threejs").append(container);
+    camera = new THREE.PerspectiveCamera( 60, window.innerWidth / (window.innerHeight - 30), 1, 10000 );
+    camera.position.z = 500;
+    scene = new THREE.Scene();
+    var geometry = new THREE.BoxGeometry( 100, 100, 100 );
+    var material = new THREE.MeshNormalMaterial( { overdraw: 0.5 } );
+    group = new THREE.Group();
+    for ( var i = 0; i < 200; i ++ ) {
+        var mesh = new THREE.Mesh( geometry, material );
+        mesh.position.x = Math.random() * 2000 - 1000;
+        mesh.position.y = Math.random() * 2000 - 1000;
+        mesh.position.z = Math.random() * 2000 - 1000;
+        mesh.rotation.x = Math.random() * 2 * Math.PI;
+        mesh.rotation.y = Math.random() * 2 * Math.PI;
+        mesh.matrixAutoUpdate = false;
+        mesh.updateMatrix();
+        group.add( mesh );
+    }
+    scene.add( group );
+    renderer = new THREE.CanvasRenderer();
+    renderer.setClearColor( 0xffffff );
+    renderer.setPixelRatio( window.devicePixelRatio );
+    renderer.setSize( window.innerWidth, (window.innerHeight - 30) );
+    container.appendChild( renderer.domElement );
+    //stats = new Stats();
+    //container.appendChild( stats.dom );
+    //
+    window.addEventListener( 'resize', onWindowResize, false );
+}
+function onWindowResize() {
+    windowHalfX = window.innerWidth / 2;
+    windowHalfY = (window.innerHeight - 30)/ 2;
+    camera.aspect = window.innerWidth / (window.innerHeight - 30);
+    camera.updateProjectionMatrix();
+    renderer.setSize( window.innerWidth, (window.innerHeight - 30) );
+}
+function onDocumentMouseMove(event) {
+    mouseX = ( event.clientX - windowHalfX ) * 10;
+    mouseY = ( event.clientY - windowHalfY ) * 10;
+}
+//
+function animate() {
+    requestAnimationFrame(animate);
+    render();
+    //stats.update();
+}
+function render() {
+    camera.position.x += ( mouseX - camera.position.x ) * .05;
+    camera.position.y += ( - mouseY - camera.position.y ) * .05;
+    camera.lookAt( scene.position );
+    var currentSeconds = Date.now();
+    group.rotation.x = Math.sin( currentSeconds * 0.0007 ) * 0.5;
+    group.rotation.y = Math.sin( currentSeconds * 0.0003 ) * 0.5;
+    group.rotation.z = Math.sin( currentSeconds * 0.0002 ) * 0.5;
+    renderer.render( scene, camera );
+}</script></body></html>
