@@ -1,0 +1,38 @@
+doctype html
+html(lang='en')
+    head
+        meta(charset='utf-8')
+        meta(http-equiv='X-UA-Compatible', content='IE=edge')
+        meta(name='viewport', content='width=device-width, initial-scale=1')
+        meta(name='author', content='soolx')
+
+        title Soolx
+        // Bootstrap core CSS
+        link(href='https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css', rel='stylesheet')
+
+        link(href='public/css/main.min.css', rel='stylesheet')
+        //Jquery
+        script(src='https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js')
+        // Bootstrap core JavaScript
+        script(src='https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js')
+    body
+        nav.navbar.navbar-default.navbar-fixed-top
+            div.container
+                div.navbar-header
+                    button.navbar-toggle.collapsed(type='button', data-toggle='collapse', data-target='#navbar',
+                        aria-expanded='false', aria-controls='navbar')
+                        span.sr-only Toggle navigation
+                        span.icon-bar
+                        span.icon-bar
+                        span.icon-bar
+                    a#title.navbar-brand(href='/') Soolx
+                div#navbar.navbar-collapse.collapse
+                    ul.nav.navbar-nav
+                        //li.active
+                        //    a(href='/') Home
+                        li
+                            a(href='http://blog.soolx.club', target='_blank') Blog
+                        li
+                            a(href='https://github.com/soolx', target='_blank') GitHub
+                        li
+                            a(href='mailto:soolx911@gmail.com', target='_blank') Email
