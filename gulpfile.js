@@ -21,6 +21,18 @@ gulp.task('sass', function () {
         .pipe(browserSync.stream());
 });
 
+gulp.task('cakesass', function () {
+    return gulp.src('cake/css/style.scss')
+        .pipe(sass({
+            includePaths: ['scss'],
+            outputStyle: 'compressed'
+        }).on('error', sass.logError))
+        .pipe(prefix(['last 15 versions', '> 1%', 'ie 8', 'ie 7'], {cascade: true}))
+        .pipe(rename('style.min.css'))
+        .pipe(gulp.dest('cake/css'))
+        .pipe(browserSync.stream());
+});
+
 /**
  * Build jade files to html
  */
@@ -48,6 +60,8 @@ gulp.task('jade', function () {
 gulp.task('watch', function () {
     gulp.watch('css/*.scss', ['sass'])
         .on('change', browserSync.reload);
+    gulp.watch('cake/css/*.scss', ['sass'])
+        .on('change', browserSync.reload);
     gulp.watch('*.jade', ['jade'])
         .on('change', browserSync.reload);
     //gulp.watch('js/common.js', ['compress']);
@@ -67,4 +81,4 @@ gulp.task('browser-sync', function () {
  * Default task, running just `gulp` will compile the sass,
  * compile the jekyll site, launch BrowserSync & watch files.
  */
-gulp.task('default', ['sass', 'jade', 'watch', 'browser-sync']);
+gulp.task('default', ['cakesass', 'sass', 'jade', 'watch', 'browser-sync']);
