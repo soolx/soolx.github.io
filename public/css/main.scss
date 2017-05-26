@@ -5,14 +5,14 @@ $title: #6699FF;
   font-family: 'Lato';
   font-style: normal;
   font-weight: 900;
-  src: local('Lato Black'), local('Lato-Black'), url('http://source.soolx.club/font/Lato-Black.woff') format('woff');
+  src: local('Lato Black'), local('Lato-Black'), url('/public/font/Lato-Black.woff') format('woff');
 }
 
 @font-face {
   font-family: 'Architects Daughter';
   font-style: normal;
   font-weight: 400;
-  src: local('Architects Daughter'), local('ArchitectsDaughter'), url('http://source.soolx.club/font/Architects Daughter.woff2') format('woff2');
+  src: local('Architects Daughter'), local('ArchitectsDaughter'), url('/public/font/Architects Daughter.woff2') format('woff2');
 }
 
 nav {

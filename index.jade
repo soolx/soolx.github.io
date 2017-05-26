@@ -10,7 +10,7 @@ html(lang='en')
         // Bootstrap core CSS
         link(href='https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css', rel='stylesheet')
 
-        link(href='css/main.min.css', rel='stylesheet')
+        link(href='public/css/main.min.css', rel='stylesheet')
         //Jquery
         script(src='https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js')
         // Bootstrap core JavaScript
@@ -41,13 +41,13 @@ html(lang='en')
         //    div.row
         div#threejs
 
-        script(src="https://cdn.bootcss.com/three.js/r83/three.min.js")
-        script(src="http://source.soolx.club/lib/threejs/renderers/Projector.js")
-        script(src="http://source.soolx.club/lib/threejs/renderers/CanvasRenderer.js")
+        script(src="public/lib/threejs/three.min.js")
+        script(src="public/lib/threejs/renderers/Projector.js")
+        script(src="public/lib/threejs/renderers/CanvasRenderer.js")
         script.
-            var container;
+            var container, stats;
             var camera, scene, renderer;
-            var group;
+            var geometry, group;
             var mouseX = 0, mouseY = 0;
             var windowHalfX = window.innerWidth / 2;
             var windowHalfY = (window.innerHeight - 30) / 2;
