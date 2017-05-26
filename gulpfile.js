@@ -10,14 +10,14 @@ var browserSync = require('browser-sync').create();
  * Compile files from _style into css
  */
 gulp.task('sass', function () {
-    return gulp.src('public/css/main.scss')
+    return gulp.src('css/main.scss')
         .pipe(sass({
             includePaths: ['scss'],
             outputStyle: 'compressed'
         }).on('error', sass.logError))
         .pipe(prefix(['last 15 versions', '> 1%', 'ie 8', 'ie 7'], {cascade: true}))
         .pipe(rename('main.min.css'))
-        .pipe(gulp.dest('public/css'))
+        .pipe(gulp.dest('css'))
         .pipe(browserSync.stream());
 });
 
@@ -46,7 +46,7 @@ gulp.task('jade', function () {
  * Watch html/md files, run jekyll & reload BrowserSync
  */
 gulp.task('watch', function () {
-    gulp.watch('public/css/*.scss', ['sass'])
+    gulp.watch('css/*.scss', ['sass'])
         .on('change', browserSync.reload);
     gulp.watch('*.jade', ['jade'])
         .on('change', browserSync.reload);
